@@ -14,4 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view("/", "index");
-Route::view("/admin", "admin");
+
+Auth::routes(["verify" => "true"]);
+
+Route::group(["middleware" => "verified"], function() {
+    Route::view("/admin", "admin");
+});
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

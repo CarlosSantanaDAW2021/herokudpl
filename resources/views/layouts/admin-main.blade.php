@@ -6,14 +6,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="{{ asset('css/simple-sidebar.css') }}" rel="stylesheet">
   </head>
 
   <body>
@@ -21,7 +21,7 @@
       
       <!-- Sidebar -->
       <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">Start Bootstrap </div>
+        <div class="sidebar-heading">{{ config('app.name', 'Laravel') }}</div>
         <div class="list-group list-group-flush">
           <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
           <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
@@ -48,20 +48,31 @@
               <li class="nav-item active">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
+              @guest
+                @if (Route::has('login'))
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
+                  </li>
+                @endif
+                
+                @if (Route::has('register'))
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarme') }}</a>
+                  </li>
+                @endif
+                @else
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                      {{ __('Cerrar sesión') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                    </form>
+                  </li>
+              @endguest
             </ul>
           </div>
         </nav>
