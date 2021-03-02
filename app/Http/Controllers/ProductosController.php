@@ -13,7 +13,7 @@ class ProductosController extends Controller
 
     }
 
-    // TODO: mostrar productos en admin (podria juntarse con getProductos)
+    // Mostrar productos en admin
     public function showProductos() {
         $productos = Producto::all();
         return view("productos.show", ["productos" => $productos]);
@@ -47,17 +47,30 @@ class ProductosController extends Controller
         $producto->save();
 
         $request->session()->flash("correcto", "Se ha creado el producto");
-        return redirect("/admin");
+        return redirect("/admin/productos/show");
     }
 
-    // TODO: mostrar formulario para editar producto
-    public function getEditProductos() {
+    // Mostrar formulario para editar producto
+    // TODO: modificar vista para que muestre la imagen
+    public function getEditProductos($id) {
         $producto = Producto::findOrFail($id);
         return view("productos.edit", ["producto" => $producto]);
     }
 
-    // TODO: editar un producto según el formulario anterior
-    public function putEditProductos() {
+    // Editar un producto según el formulario anterior
+    public function putEditProductos($id, Request $request) {
+        $validator = Validator::make($request->all(), [
+            "nombre" => "required|string|max:255",
+            "imagen" => "required|mimes:png,jpg|max:2048",
+            "precio" => "required|numeric|gte:0"
+        ]);
+
+        if ($validator->fails()) {
+            return redirect("/admin/productos/edit/" . $id)
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+
         $request->file("imagen")->store("public");
 
         $producto = Producto::findOrFail($id);
@@ -67,11 +80,15 @@ class ProductosController extends Controller
         $producto->save();
 
         $request->session()->flash("correcto", "Se ha editado el producto");
-        return redirect("/admin");
+        return redirect("/admin/productos/show");
     }
 
-    // TODO: eliminar un producto
-    public function deleteProductos() {
+    // Eliminar un producto
+    public function deleteProductos($id, Request $request) {
+        $producto = Producto::findOrFail($id);
+        $producto->delete();
 
+        $request->session()->flash("correcto", "Se ha borrado el producto");
+        return redirect("/admin/productos/show");
     }
 }

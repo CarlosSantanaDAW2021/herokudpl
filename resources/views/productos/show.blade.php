@@ -1,5 +1,9 @@
 @extends("layouts.admin-main")
 @section("content")
+    @if(Session::has("correcto"))
+        <div class="alert alert-success">{{Session::get("correcto")}}</div>
+    @endif
+    
     <table class="table">
         <thead>
             <th scope="col">#</th>
@@ -18,7 +22,15 @@
                     <td>{{ $producto->imagen }}</td>
                     <td>{{ $producto->precio }}</td>
                     <td><a class="btn btn-warning" href="{{url('/admin/productos/edit/' . $producto->id)}}">Editar</a></td>
-                    <td><a class="btn btn-danger" href="{{url('/admin/productos/delete/' . $producto->id)}}">Eliminar</a></td>
+                    <td>
+                        <form method="post" action="{{url('/admin/productos/delete/' . $producto->id)}}" style="display:inline">
+                            @method("DELETE")
+                            @csrf
+                            <button type="submit" class="btn btn-danger" role="button">
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

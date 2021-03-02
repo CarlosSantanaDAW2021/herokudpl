@@ -21,10 +21,15 @@ Auth::routes(["verify" => "true"]);
 Route::group(["middleware" => "verified"], function() {
     Route::view("/admin", "admin");
 
+    Route::get("/admin/productos/show", [ProductosController::class, "showProductos"]);
+
     Route::get("/admin/productos/create", [ProductosController::class, "getCreateProductos"]);
     Route::post("/admin/productos/create", [ProductosController::class, "postCreateProductos"]);
 
-    Route::get("/admin/productos/show", [ProductosController::class, "showProductos"]);
+    Route::get("/admin/productos/edit/{id}", [ProductosController::class, "getEditProductos"]);
+    Route::put("/admin/productos/edit/{id}", [ProductosController::class, "putEditProductos"]);
+
+    Route::delete("/admin/productos/delete/{id}", [ProductosController::class, "deleteProductos"]);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
