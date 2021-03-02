@@ -3,28 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 
 class ClientesController extends Controller
 {
     // Mostrar clientes en admin
     public function showClientes() {
-        $clientes = Producto::all();
+        $clientes = User::all();
         return view("clientes.show", ["clientes" => $clientes]);
     }
 
-    // Mostrar formulario para editar producto
-    // TODO: modificar vista para que muestre la imagen
-    public function getEditclientes($id) {
-        $producto = Producto::findOrFail($id);
-        return view("clientes.edit", ["producto" => $producto]);
+    // Mostrar formulario para editar cliente
+    public function getEditClientes($id) {
+        $cliente = User::findOrFail($id);
+        return view("clientes.edit", ["cliente" => $cliente]);
     }
 
-    // Editar un producto según el formulario anterior
-    public function putEditclientes($id, Request $request) {
+    // Editar un cliente según el formulario anterior
+    public function putEditClientes($id, Request $request) {
         $validator = Validator::make($request->all(), [
-            "nombre" => "required|string|max:255",
-            "imagen" => "required|mimes:png,jpg|max:2048",
-            "precio" => "required|numeric|gte:0"
+            "name" => "required|string|max:255",
+            "email" => "required|email|max:255",
+            "telefono" => "required|digits:9"
         ]);
 
         if ($validator->fails()) {
@@ -33,24 +34,22 @@ class ClientesController extends Controller
                     ->withInput();
         }
 
-        $request->file("imagen")->store("public");
+        $cliente = User::findOrFail($id);
+        $cliente->name = $request->input("name");
+        $cliente->email = $request->input("email");
+        $cliente->telefono = $request->input("telefono");
+        $cliente->save();
 
-        $producto = Producto::findOrFail($id);
-        $producto->nombre = $request->input("nombre");
-        $producto->imagen = asset("storage/" . $request->file("imagen")->hashName());
-        $producto->precio = $request->input("precio");
-        $producto->save();
-
-        $request->session()->flash("correcto", "Se ha editado el producto");
+        $request->session()->flash("correcto", "Se ha editado el cliente");
         return redirect("/admin/clientes/show");
     }
 
-    // Eliminar un producto
-    public function deleteclientes($id, Request $request) {
-        $producto = Producto::findOrFail($id);
-        $producto->delete();
+    // Eliminar un cliente
+    public function deleteClientes($id, Request $request) {
+        $cliente = User::findOrFail($id);
+        $cliente->delete();
 
-        $request->session()->flash("correcto", "Se ha borrado el producto");
+        $request->session()->flash("correcto", "Se ha borrado el cliente");
         return redirect("/admin/clientes/show");
     }
 }
