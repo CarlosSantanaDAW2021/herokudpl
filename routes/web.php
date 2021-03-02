@@ -23,6 +23,8 @@ Route::group(["middleware" => "verified"], function() {
 
     Route::get("/admin/productos/create", [ProductosController::class, "getCreateProductos"]);
     Route::post("/admin/productos/create", [ProductosController::class, "postCreateProductos"]);
+
+    Route::get("/admin/productos/show", [ProductosController::class, "showProductos"]);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

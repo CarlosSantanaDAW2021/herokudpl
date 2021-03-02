@@ -15,7 +15,8 @@ class ProductosController extends Controller
 
     // TODO: mostrar productos en admin (podria juntarse con getProductos)
     public function showProductos() {
-
+        $productos = Producto::all();
+        return view("productos.show", ["productos" => $productos]);
     }
 
     // Muestra el formulario para crear productos
@@ -51,12 +52,22 @@ class ProductosController extends Controller
 
     // TODO: mostrar formulario para editar producto
     public function getEditProductos() {
-
+        $producto = Producto::findOrFail($id);
+        return view("productos.edit", ["producto" => $producto]);
     }
 
     // TODO: editar un producto según el formulario anterior
     public function putEditProductos() {
+        $request->file("imagen")->store("public");
 
+        $producto = Producto::findOrFail($id);
+        $producto->nombre = $request->input("nombre");
+        $producto->imagen = asset("storage/" . $request->file("imagen")->hashName());
+        $producto->precio = $request->input("precio");
+        $producto->save();
+
+        $request->session()->flash("correcto", "Se ha editado el producto");
+        return redirect("/admin");
     }
 
     // TODO: eliminar un producto
