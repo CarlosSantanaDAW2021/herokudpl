@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,9 @@ Auth::routes(["verify" => "true"]);
 
 Route::group(["middleware" => "verified"], function() {
     Route::view("/admin", "admin");
+
+    Route::get("/admin/productos/create", [ProductosController::class, "getCreateProductos"]);
+    Route::post("/admin/productos/create", [ProductosController::class, "postCreateProductos"]);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

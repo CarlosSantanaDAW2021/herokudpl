@@ -26,6 +26,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+            {{-- TODO: mostrar boton solo si el usuario logueado tiene rol admin --}}
+            <li class="nav-item">
+              <a class="nav-link" href="/admin">{{ __('Panel de administración') }}</a>
+            </li>
+            
             @guest
               @if (Route::has('login'))
                 <li class="nav-item">
