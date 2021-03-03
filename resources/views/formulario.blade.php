@@ -1,6 +1,6 @@
 @include('partials.form-partial')
 
-<form class="jotform-form" action="https://submit.jotformeu.com/submit/210586364073355/" method="post" name="form_210586364073355" id="210586364073355" accept-charset="utf-8" autocomplete="on">
+<form class="jotform-form" action="" method="post" name="form_210586364073355" id="210586364073355" accept-charset="utf-8" autocomplete="on">
   <input type="hidden" name="formID" value="210586364073355" />
   <input type="hidden" id="JWTContainer" value="" />
   <input type="hidden" id="cardinalOrderNumber" value="" />

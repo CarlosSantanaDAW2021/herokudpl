@@ -5,9 +5,9 @@
 
   <!-- Jumbotron Header -->
   <header class="jumbotron my-4">
-    <h1 class="display-3">A Warm Welcome!</h1>
-    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-    <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
+    <h1 class="display-3">Bienvenido a la página de la cafetería del centro majada marcial</h1>
+    <p class="lead">Realiza tu pedido sin necesidad de esperar largas colas </p>
+    <a href="{{url('pedido')}}" class="btn btn-primary btn-lg">Haz tu pedido</a>
   </header>
 
   <!-- Page Features -->
