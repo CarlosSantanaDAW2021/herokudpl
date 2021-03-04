@@ -15,6 +15,8 @@ class ComandasController extends Controller
 
     // TODO: Muestra el formulario para crear comandas
     public function getCreateComandas() {
+        $comandas = new Comanda;
+        return view('comandas.create',['comanda'=>$comandas]);
         
     }
 
