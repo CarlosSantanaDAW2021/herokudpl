@@ -1,4 +1,4 @@
-@extends("layouts.admin-main")
+@extends("layouts.app")
 @section('content')
 <div class="row" style="margin-top:40px">
    <div class="offset-md-3 col-md-6">
@@ -17,15 +17,30 @@
             </div>
 
             <div class="form-group">
-               <label for="title">Cliente Solicitante</label>
-               <input type="text"name="nombre" value="{{$comanda->idCliente}}"></input>
-            </div>
-
-            <div class="form-group">
                <label for="title">Estado del pedido</label>
-               <input type="list" name="estado" value="{{$comanda->estado}}"></input>
+               <input type="text" name="estado" value="{{$comanda->estado}}"></input>
             </div>
 
+            @foreach($productos as $producto)
+            <div data-wrapper-react="true" class="form-product-item-detail">
+                  <input type="checkbox" class="form-checkbox  form-product-input" id="input_15_1014" name="productos" value="1014" />
+                  <label for="input_15_1014" class="form-product-container">
+                    <span data-wrapper-react="true">
+                      <span class="form-product-name" id="product-name-input_15_1014">
+                        {{$producto->nombre}}
+                      </span>
+                      <span class="form-product-details">
+                        <b>
+                          <span data-wrapper-react="true">
+                            €
+                            <span id="input_15_1014_price">
+                              {{$producto->precio}}
+                            </span>
+                          </span>
+                        </b>
+                      </span>
+                    </span>
+            @endforeach
             <div class="form-group text-center">
                <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
                    Agregar comanda

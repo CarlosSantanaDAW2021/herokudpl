@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comanda;
+use App\Models\User;
+use App\Models\Producto;
 use Illuminate\Support\Facades\Validator;
 
 class ComandasController extends Controller
@@ -16,12 +18,21 @@ class ComandasController extends Controller
     // TODO: Muestra el formulario para crear comandas
     public function getCreateComandas() {
         $comandas = new Comanda;
-        return view('comandas.create',['comanda'=>$comandas]);
+        $producto = Producto::all();
+        return view('comandas.create',['comanda'=>$comandas],['productos'=>$producto]);
         
     }
 
-    // TODO: Crea una comanda a partir del formulario anterior
-    public function postCreatecomandas(Request $request) {
+    // TODO: Crea una comanda a partir del formulario anterior// ¿como pasamos el id del cliente para la foranea?
+    public function postCreateComandas(Request $request) {
+        $comanda = new Comanda;
+        $producto = Producto::all();
+        $pivote = new ComandaProducto;
+        $cliente = User::find(); //¿así?
+
+        $comanda->nombre = $cliente;
+        $comanda->estado = $request->input('estado');
+        
         
     }
 
@@ -40,7 +51,7 @@ class ComandasController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect("/admin/comandas/edit/" . $id)
+            return redirect("/comandas/edit/" . $id)
                     ->withErrors($validator)
                     ->withInput();
         }
@@ -54,7 +65,7 @@ class ComandasController extends Controller
         $comanda->save();
 
         $request->session()->flash("correcto", "Se ha editado la comanda");
-        return redirect("/admin/comandas/show");
+        return redirect("/comandas/show");
     }
 
     // Eliminar una comanda
@@ -63,6 +74,6 @@ class ComandasController extends Controller
         $comanda->delete();
 
         $request->session()->flash("correcto", "Se ha borrado la comanda");
-        return redirect("/admin/comandas/show");
+        return redirect("/comandas/show");
     }
 }

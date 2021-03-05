@@ -1,0 +1,107 @@
+[33mcommit 05cd2e1d2f7d5e258939feda7f9b0acb0e380d5b[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: vagrant <vagrant@homestead>
+Date:   Thu Mar 4 01:13:53 2021 +0000
+
+    trabajando en formulario comandas
+    
+            modified:   app/Http/Controllers/ComandasController.php
+            new file:   resources/views/comandas/create.blade.php
+            modified:   routes/web.php
+            modified:   app/Http/Controllers/ComandasController.php
+
+[33mcommit d690a0ad6214a168f264f4a31cd64bc46209fc51[m[33m ([m[1;31mmain/master[m[33m)[m
+Author: Carlos Santana <ajpetee@gmail.com>
+Date:   Wed Mar 3 23:17:17 2021 +0000
+
+    cambios de direccionamiento
+
+[33mcommit ba4754b7f603b29501a2bc49ac596ee5984de8ed[m
+Author: vagrant <vagrant@homestead>
+Date:   Wed Mar 3 20:21:37 2021 +0000
+
+    CRUD comandas WIP
+
+[33mcommit c6c400addb76406e00b3f3828f0b4da4ea866a84[m
+Author: vagrant <vagrant@homestead>
+Date:   Tue Mar 2 23:49:37 2021 +0000
+
+    CRUD clientes terminado y registrarme modificado
+
+[33mcommit 1246871ab7e0c771e98b81016049ef7c2f21d402[m
+Author: vagrant <vagrant@homestead>
+Date:   Tue Mar 2 19:18:20 2021 +0000
+
+    Unido clientes y usuarios. Realizando CRUD usuarios WIP
+
+[33mcommit e61aa03646d64acb098b59631db3a0241d3599fc[m
+Author: vagrant <vagrant@homestead>
+Date:   Tue Mar 2 18:32:52 2021 +0000
+
+    Editar y eliminar productos
+
+[33mcommit 5758d03c6e306c3c1a33d88c73646d1d60a9a85a[m
+Author: vagrant <vagrant@homestead>
+Date:   Tue Mar 2 17:58:00 2021 +0000
+
+    Mostar productos en panel de administracion
+
+[33mcommit d7091504adf1c844e6dc16a781ff834368238674[m
+Merge: 7b05a97 fbeea7e
+Author: vagrant <vagrant@homestead>
+Date:   Mon Mar 1 23:16:38 2021 +0000
+
+    Merge branch 'master' of https://bitbucket.org/alejandroNikiperovich/cafeteria
+
+[33mcommit 7b05a97fff433e4f21a24117a6d42b65c3325c77[m
+Author: vagrant <vagrant@homestead>
+Date:   Tue Mar 2 00:07:39 2021 +0000
+
+    Tablas y layouts actualizados. Formulario para crear productos
+
+[33mcommit fbeea7ecfabf2f65761b5a6d64d6d0f0f7e08572[m
+Author: Alejandro Ruiz Nikiperovich <alejandronikiperovich@gmail.com>
+Date:   Sun Feb 28 23:43:26 2021 +0000
+
+    Fuera .env
+
+[33mcommit ec427850619b3589d7a267b46dd3838703f76a5f[m
+Author: Carlos Santana <ajpetee@gmail.com>
+Date:   Sun Feb 28 23:18:15 2021 +0000
+
+    insercion de formulario (falta prepararlo con los datos)
+
+[33mcommit 61a5a5f5e5af6ecf2d95fe35b4de404e4c85d456[m
+Author: vagrant <vagrant@homestead>
+Date:   Sun Feb 28 19:24:09 2021 +0000
+
+    Auth faltan controllers
+
+[33mcommit 909adcdf2f706da1007587ee2754c24fa0fdb577[m
+Author: vagrant <vagrant@homestead>
+Date:   Sun Feb 28 17:42:23 2021 +0000
+
+    Plantillas Bootstrap y páginas básicas
+
+[33mcommit 1845f6e868419dc75b088ea319a273e3693fc0ce[m
+Author: vagrant <vagrant@homestead>
+Date:   Fri Feb 26 18:04:48 2021 +0000
+
+    Fichero SQL
+
+[33mcommit d4d59bf6297dd32aea1731524a5f1ee7ef108eaa[m
+Author: vagrant <vagrant@homestead>
+Date:   Fri Feb 26 18:01:07 2021 +0000
+
+    Foraneas
+
+[33mcommit 20c57b02c3f8e15860ea7afd45f12b433eeaec88[m
+Author: vagrant <vagrant@homestead>
+Date:   Fri Feb 26 17:44:05 2021 +0000
+
+    Database done & fixed
+
+[33mcommit d346fa657cfa09c02dc33c16aa5b1831714303bd[m
+Author: vagrant <vagrant@homestead>
+Date:   Fri Feb 26 16:48:01 2021 +0000
+
+    Primer commit REDO
