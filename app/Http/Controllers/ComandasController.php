@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Comanda;
 use App\Models\User;
 use App\Models\Producto;
+use App\Models\ComandaProducto;
 use Illuminate\Support\Facades\Validator;
 
 class ComandasController extends Controller
@@ -19,7 +20,8 @@ class ComandasController extends Controller
     public function getCreateComandas() {
         $comandas = new Comanda;
         $producto = Producto::all();
-        return view('comandas.create',['comanda'=>$comandas],['productos'=>$producto]);
+        $pivote = new ComandaProducto;
+        return view('comandas.create',['comanda'=>$comandas],['productos'=>$producto],['comandaproducto'=>$pivote]);
         
     }
 

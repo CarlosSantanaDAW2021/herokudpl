@@ -41,6 +41,12 @@
                       </span>
                     </span>
             @endforeach
+
+            <div class="form-group">
+               <label for="precio">Cantidad</label>
+               <input type="number" name="cantidad" id="cantidad" class="form-control" value="{{$comandaproducto->cantidad}}">
+             </div>
+
             <div class="form-group text-center">
                <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
                    Agregar comanda
