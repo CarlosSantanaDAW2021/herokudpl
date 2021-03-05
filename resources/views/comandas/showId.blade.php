@@ -6,8 +6,7 @@
     
     <table class="table">
         <thead>
-            <th scope="col">Id Comanda</th>
-            <th scope="col">Id Producto</th>
+            <th scope="col">Producto</th>
             <th scope="col">Cantidad</th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -16,10 +15,9 @@
         <tbody>
             @foreach($productos as $key => $producto)
                 <tr>
-                    <td scope="row">{{ $producto->idComanda }}</td>
-                    <td>{{ $producto->idProducto }}</td>
+                    <td>{{ $producto->nombre }}</td>
                     <td>{{ $producto->cantidad }}</td>
-                    <td><a class="btn btn-warning" href="{{url('/admin/comandas/edit/' . $producto->idComanda)}}">Editar</a></td>
+                    <td><a class="btn btn-warning" href="{{url('/admin/comandas/edit/' . $producto->idComanda . '/' . $producto->idProducto)}}">Editar</a></td>
                     <td>
                         <form method="post" action="{{url('/admin/comandas/delete/' . $producto->idComanda . '/' . $producto->idProducto)}}" style="display:inline">
                             @method("DELETE")

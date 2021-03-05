@@ -18,7 +18,7 @@
         <div class="offset-md-3 col-md-6">
             <div class="card">
                 <div class="card-header text-center">
-                    Modificar comanda
+                    Modificar estado de la comanda
                 </div>
                 
                 <div class="card-body" style="padding:30px">
@@ -26,23 +26,21 @@
                         @method("PUT")
                         @csrf
                         <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" name="nombre" id="nombre" class="form-control" value="{{$producto->nombre}}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="imagen">Imagen</label>
-                            <input type="file" name="imagen" id="imagen" class="form-control" value="{{$producto->imagen}}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="precio">Precio</label>
-                            <input type="text" name="precio" id="precio" class="form-control" value="{{$producto->precio}}">
+                            <label for="estado">Estado</label>
+                            <select name="estado" id="estado">
+                                @foreach($estados as $key => $estado)
+                                    @if($comanda->estado == $estado)
+                                        <option value="{{ $estado }}" selected>{{ $estado }}</option>
+                                    @else   
+                                        <option value="{{ $estado }}">{{ $estado }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </div>
                     
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
-                                Modificar producto
+                                Modificar estado
                             </button>
                         </div>
                     </form>

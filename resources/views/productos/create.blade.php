@@ -41,8 +41,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="precio">Descripcion</label>
-                            <input type="text" name="descripcion" id="precio" class="form-control" value="{{old('descripcion')}}">
+                            <label for="descripcion">Descripcion</label>
+                            <input type="text" name="descripcion" id="descripcion" class="form-control" value="{{old('descripcion')}}">
                         </div>
                     
                         <div class="form-group text-center">

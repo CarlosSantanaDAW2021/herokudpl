@@ -18,13 +18,9 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-<<<<<<< HEAD
 Route::get('/', [ProductosController::class ,"getProductos"]);
-=======
-Route::view("/", "index");
 Route::get("/pedido", [ComandasController::class, "getCreateComandas"]);
 Route::post("/pedido", [ComandasController::class, "postCreateComandas"]);
->>>>>>> f304dfa26efdfac94ff8f1c22d947c4b2c46ae66
 
 Auth::routes(["verify" => "true"]);
 
@@ -45,25 +41,12 @@ Route::group(["middleware" => "verified"], function() {
     Route::put("/admin/clientes/edit/{id}", [ClientesController::class, "putEditClientes"]);
     Route::delete("/admin/clientes/delete/{id}", [ClientesController::class, "deleteClientes"]);
 
-<<<<<<< HEAD
-    
-});
-//rutas comandas
-Route::get("/comandas/show",[ComandasController::class,"showComandas"]);
-Route::get("/comandas/edit/{id}",[ComandasController::class,"getEditComandas"]);
-Route::get("/comandas/create",[ComandasController::class,"getCreateComandas"]);
-Route::post("/comandas/create",[ComandasController::class,"postCreateComandas"]);
-Route::put("/comandas/edit",[ComandasController::class,"putEditComandas"]);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-Route::get('/pedido',function(){
-    return view('formulario');
-=======
     Route::get("/admin/comandas/show", [ComandasController::class, "showComandas"]);
     Route::get("/admin/comandas/show/{id}", [ComandasController::class, "showComandasId"]);
+    Route::get("/admin/comandas/edit/{id}", [ComandasController::class, "getEditComandas"]);
+    Route::put("/admin/comandas/edit/{id}", [ComandasController::class, "putEditComandas"]);
+    Route::get("/admin/comandas/edit/{idComanda}/{idProducto}", [ComandasController::class, "getEditComandasSingle"]);
+    Route::put("/admin/comandas/edit/{idComanda}/{idProducto}", [ComandasController::class, "putEditComandasSingle"]);
     Route::delete("/admin/comandas/delete/{id}", [ComandasController::class, "deleteComandas"]);
     Route::delete("/admin/comandas/delete/{idComanda}/{idProducto}", [ComandasController::class, "deleteComandasSingle"]);
->>>>>>> f304dfa26efdfac94ff8f1c22d947c4b2c46ae66
 });

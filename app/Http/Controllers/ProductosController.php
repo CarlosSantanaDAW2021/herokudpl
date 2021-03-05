@@ -13,7 +13,6 @@ class ProductosController extends Controller
     public function getProductos() {
         $producto = DB::table('productos')->get();
         return view('index-no-logged',['productos'=> DB::table('productos')->paginate(10)],["productos" => $producto]);
-
     }
 
     // Mostrar productos en admin
@@ -67,7 +66,7 @@ class ProductosController extends Controller
         $validator = Validator::make($request->all(), [
             "nombre" => "required|string|max:255",
             "imagen" => "required|mimes:png,jpg|max:2048",
-            "precio" => "required|numeric|gte:0"
+            "precio" => "required|numeric|gte:0",
             "descripcion"=> "required|string|max:255"
         ]);
 

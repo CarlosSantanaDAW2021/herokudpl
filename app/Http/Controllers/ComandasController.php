@@ -14,13 +14,19 @@ use Auth;
 class ComandasController extends Controller
 {
     public function showComandas() {
-        $comandas = Comanda::all();
+        $comandas = DB::table("comandas")
+                        ->join("users", "comandas.idCliente", "=", "users.id")
+                        ->select("comandas.*", "users.name")
+                        ->get();
+
         return view("comandas.show", ["comandas" => $comandas]);
     }
 
     public function showComandasId($id) {
         $productos = DB::table("comandas_productos")
                             ->where("idComanda", $id)
+                            ->join("productos", "comandas_productos.idProducto", "=", "productos.id")
+                            ->select("comandas_productos.*", "productos.nombre")
                             ->get();
         
         return view("comandas.showId", ["productos" => $productos]);
@@ -61,38 +67,47 @@ class ComandasController extends Controller
             $pivote->cantidad = $value;
             $pivote->save();
         }
+
+        $request->session()->flash("correcto", "Se ha realizado su pedido");
+        return redirect("/");
     }
 
     // Mostrar formulario para editar comanda
     public function getEditComandas($id) {
         $comanda = Comanda::findOrFail($id);
-        return view("comandas.edit", ["comanda" => $comanda]);
+        $estados = ["PEDIDO", "PAGADO", "ENTREGADO"];
+        return view("comandas.edit", ["comanda" => $comanda, "estados" => $estados]);
     }
 
     // Editar una comanda según el formulario anterior
     public function putEditComandas($id, Request $request) {
-        $validator = Validator::make($request->all(), [
-            "nombre" => "required|string|max:255",
-            "imagen" => "required|mimes:png,jpg|max:2048", 
-            "precio" => "required|numeric|gte:0"
-        ]);
-
-        if ($validator->fails()) {
-            return redirect("/comandas/edit/" . $id)
-                    ->withErrors($validator)
-                    ->withInput();
-        }
-
-        $request->file("imagen")->store("public");
-
-        $comanda = comanda::findOrFail($id);
-        $comanda->nombre = $request->input("nombre");
-        $comanda->imagen = asset("storage/" . $request->file("imagen")->hashName());
-        $comanda->precio = $request->input("precio");
+        $comanda = Comanda::findOrFail($id);
+        $comanda->estado = $request->input("estado");
         $comanda->save();
 
         $request->session()->flash("correcto", "Se ha editado la comanda");
-        return redirect("/comandas/show");
+        return redirect("/admin/comandas/show");
+    }
+
+    // Mostrar formulario para editar registro de comanda
+    public function getEditComandasSingle($idComanda, $idProducto) {
+        $comanda = DB::table("comandas_productos")
+                        ->where("idComanda", $idComanda)
+                        ->where("idProducto", $idProducto)
+                        ->get();
+
+        return view("comandas.editSingle", ["comanda" => $comanda]);
+    }
+
+    // Editar una comanda según el formulario anterior
+    public function putEditComandasSingle($idComanda, $idProducto, Request $request) {
+        $comanda = DB::table("comandas_productos")
+                        ->where("idComanda", $idComanda)
+                        ->where("idProducto", $idProducto)
+                        ->update(["cantidad" => $request->input("cantidad")]);
+
+        $request->session()->flash("correcto", "Se ha editado la comanda");
+        return redirect("/admin/comandas/show/" . $idComanda);
     }
 
     // Eliminar una comanda
