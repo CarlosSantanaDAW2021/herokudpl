@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductosController extends Controller
 {
-    // TODO: mostrar productos en pagina principal
+    // mostrar productos en pagina principal
     public function getProductos() {
         $producto = DB::table('productos')->get();
-        return view('index-no-logged',['productos'=> DB::table('productos')->paginate(10)],["productos" => $producto]);
+        return view('index',['productos'=> DB::table('productos')->paginate(8)],["productos" => $producto]);
+
     }
 
     // Mostrar productos en admin
