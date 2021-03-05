@@ -16,7 +16,7 @@ use App\Http\Controllers\HomeController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+*/https://Carlos_Santana_DAW@bitbucket.org/alejandroNikiperovich/cafeteria.git
 
 Route::get('/', [ProductosController::class ,"getProductos"]);
 Route::get("/pedido", [ComandasController::class, "getCreateComandas"]);
@@ -40,7 +40,7 @@ Route::group(["middleware" => "verified"], function() {
     Route::get("/admin/clientes/edit/{id}", [ClientesController::class, "getEditClientes"]);
     Route::put("/admin/clientes/edit/{id}", [ClientesController::class, "putEditClientes"]);
     Route::delete("/admin/clientes/delete/{id}", [ClientesController::class, "deleteClientes"]);
-    
+
     //rutas comandas
     Route::get("/admin/comandas/show", [ComandasController::class, "showComandas"]);
     Route::get("/admin/comandas/show/{id}", [ComandasController::class, "showComandasId"]);
