@@ -1,0 +1,31 @@
+@extends("layouts.main")
+@section("content")
+    <h1>Realizar un pedido</h1>
+
+    <div class="row" style="margin-top:40px">
+        <div class="offset-md-3 col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    Crear comanda
+                </div>
+                
+                <div class="card-body" style="padding:30px">
+                    <form method="post">
+                        @method("POST")
+                        @csrf
+                        
+                        @foreach($productos as $key => $producto)
+                            @include("partials.input-comanda")
+                        @endforeach
+                    
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
+                                Realizar pedido
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@stop

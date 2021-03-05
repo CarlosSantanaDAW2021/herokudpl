@@ -19,7 +19,7 @@
                     <th scope="row">{{ $comanda->id }}</th>
                     <td>{{ $comanda->idCliente }}</td>
                     <td>{{ $comanda->estado }}</td>
-                    <td><a class="btn btn-info" href="{{url('/admin/comandas/edit/' . $comanda->id)}}">Ver detalles</a></td>
+                    <td><a class="btn btn-info" href="{{url('/admin/comandas/show/' . $comanda->id)}}">Ver detalles</a></td>
                     <td>
                         <form method="post" action="{{url('/admin/comandas/delete/' . $comanda->id)}}" style="display:inline">
                             @method("DELETE")

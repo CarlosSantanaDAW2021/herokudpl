@@ -13,7 +13,7 @@ class CreateComandaProducto extends Migration
      */
     public function up()
     {
-        Schema::create('comanda_producto', function (Blueprint $table) {
+        Schema::create('comandas_productos', function (Blueprint $table) {
             $table->unsignedBigInteger("idComanda");
             $table->unsignedBigInteger("idProducto");
             $table->timestamps();
@@ -31,6 +31,6 @@ class CreateComandaProducto extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comanda_producto');
+        Schema::dropIfExists('comandas_productos');
     }
 }
