@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Producto;
 use App\Models\ComandasProductos;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Auth;
 
 class ComandasController extends Controller
@@ -15,6 +16,14 @@ class ComandasController extends Controller
     public function showComandas() {
         $comandas = Comanda::all();
         return view("comandas.show", ["comandas" => $comandas]);
+    }
+
+    public function showComandasId($id) {
+        $productos = DB::table("comandas_productos")
+                            ->where("idComanda", $id)
+                            ->get();
+        
+        return view("comandas.showId", ["productos" => $productos]);
     }
 
     // Muestra el formulario para crear comandas
@@ -92,6 +101,16 @@ class ComandasController extends Controller
         $comanda->delete();
 
         $request->session()->flash("correcto", "Se ha borrado la comanda");
-        return redirect("/comandas/show");
+        return redirect("/admin/comandas/show");
+    }
+
+    public function deleteComandasSingle($idComanda, $idProducto, Request $request) {
+        $comandaSingle = DB::table("comandas_productos")
+                                ->where("idComanda", $idComanda)
+                                ->where("idProducto", $idProducto)
+                                ->delete();
+
+        $request->session()->flash("correcto", "Se ha borrado el producto de la comanda");
+        return redirect("/admin/comandas/show/" . $idComanda);
     }
 }

@@ -40,4 +40,7 @@ Route::group(["middleware" => "verified"], function() {
     Route::delete("/admin/clientes/delete/{id}", [ClientesController::class, "deleteClientes"]);
 
     Route::get("/admin/comandas/show", [ComandasController::class, "showComandas"]);
+    Route::get("/admin/comandas/show/{id}", [ComandasController::class, "showComandasId"]);
+    Route::delete("/admin/comandas/delete/{id}", [ComandasController::class, "deleteComandas"]);
+    Route::delete("/admin/comandas/delete/{idComanda}/{idProducto}", [ComandasController::class, "deleteComandasSingle"]);
 });
