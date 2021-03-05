@@ -22,3 +22,57 @@ h1.display-3 {
 .card-body {
     float: right;
 }
+
+@media screen and (max-width: 490px) {
+    header {
+        background-image: url("https://www.ptfue.com/wp-content/uploads/2019/04/CIFPlogo_oficial_transparente.png");
+        background-size: 100px;
+        background-repeat: no-repeat;
+        background-position-y: 3%;
+    }
+    h1.display-3 {
+        font-size: 150%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    header {
+        background-image: url("https://www.ptfue.com/wp-content/uploads/2019/04/CIFPlogo_oficial_transparente.png");
+        background-size: 100px;
+        background-repeat: no-repeat;
+        background-position-y: 3%;
+    }
+    h1.display-3 {
+        font-size: 300%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    header {
+        background-image: url("https://www.ptfue.com/wp-content/uploads/2019/04/CIFPlogo_oficial_transparente.png");
+        background-size: 140px;
+        background-repeat: no-repeat;
+        background-position-y: 3%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    header {
+        background-image: url("https://www.ptfue.com/wp-content/uploads/2019/04/CIFPlogo_oficial_transparente.png");
+        background-size: 145px;
+        background-repeat: no-repeat;
+        background-position-y: 3%;
+    }
+    h1.display-3 {
+        font-size: 400%;
+    }
+}
+
+@media screen and (max-width: 1182px) {
+    header {
+        background-image: url("https://www.ptfue.com/wp-content/uploads/2019/04/CIFPlogo_oficial_transparente.png");
+        background-size: 120px;
+        background-repeat: no-repeat;
+        background-position-y: 3%;
+    }
+}
