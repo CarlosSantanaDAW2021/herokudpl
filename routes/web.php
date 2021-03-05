@@ -18,13 +18,9 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-<<<<<<< HEAD
 Route::get('/', [ProductosController::class ,"getProductos"]);
-=======
-Route::view("/", "index");
 Route::get("/pedido", [ComandasController::class, "getCreateComandas"]);
 Route::post("/pedido", [ComandasController::class, "postCreateComandas"]);
->>>>>>> f304dfa26efdfac94ff8f1c22d947c4b2c46ae66
 
 Auth::routes(["verify" => "true"]);
 
@@ -45,7 +41,6 @@ Route::group(["middleware" => "verified"], function() {
     Route::put("/admin/clientes/edit/{id}", [ClientesController::class, "putEditClientes"]);
     Route::delete("/admin/clientes/delete/{id}", [ClientesController::class, "deleteClientes"]);
 
-<<<<<<< HEAD
     
 });
 //rutas comandas
@@ -57,13 +52,11 @@ Route::put("/comandas/edit",[ComandasController::class,"putEditComandas"]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
+//rutas pedido
 Route::get('/pedido',function(){
     return view('formulario');
-=======
     Route::get("/admin/comandas/show", [ComandasController::class, "showComandas"]);
     Route::get("/admin/comandas/show/{id}", [ComandasController::class, "showComandasId"]);
     Route::delete("/admin/comandas/delete/{id}", [ComandasController::class, "deleteComandas"]);
     Route::delete("/admin/comandas/delete/{idComanda}/{idProducto}", [ComandasController::class, "deleteComandasSingle"]);
->>>>>>> f304dfa26efdfac94ff8f1c22d947c4b2c46ae66
 });

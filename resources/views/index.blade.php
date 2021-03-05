@@ -20,9 +20,7 @@
           <h4 class="card-title">{{$producto->nombre}}</h4>
           <p class="card-text">{{$producto->descripcion}}</p>
         </div>
-        <div class="card-footer">
-          <a href="#" class="btn btn-primary">Find Out More!</a>
-        </div>
+       
       </div>
     </div>
   </div>
