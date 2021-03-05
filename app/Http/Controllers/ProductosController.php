@@ -68,6 +68,7 @@ class ProductosController extends Controller
             "nombre" => "required|string|max:255",
             "imagen" => "required|mimes:png,jpg|max:2048",
             "precio" => "required|numeric|gte:0"
+            "descripcion"=> "required|string|max:255"
         ]);
 
         if ($validator->fails()) {
@@ -82,6 +83,7 @@ class ProductosController extends Controller
         $producto->nombre = $request->input("nombre");
         $producto->imagen = asset("storage/" . $request->file("imagen")->hashName());
         $producto->precio = $request->input("precio");
+        $producto->descripcion = $request->input("descripcion");
         $producto->save();
 
         $request->session()->flash("correcto", "Se ha editado el producto");
