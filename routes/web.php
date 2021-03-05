@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ComandasController;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,7 @@ use App\Http\Controllers\ComandasController;
 |
 */
 
-Route::view("/", "index");
+Route::get('/', [App\Http\Controllers\HomeController::class, 'indexNoLogged']);
 
 Auth::routes(["verify" => "true"]);
 
@@ -48,11 +50,7 @@ Route::put("/comandas/edit",[ComandasController::class,"putEditComandas"]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
 Route::get('/pedido',function(){
     return view('formulario');
-
-
-
-
-
 });

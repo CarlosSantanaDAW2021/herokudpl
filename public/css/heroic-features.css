@@ -3,6 +3,14 @@
  * Copyright 2013-2020 Start Bootstrap
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-heroic-features/blob/master/LICENSE)
  */
+
 body {
-  padding-top: 56px;
+    padding-top: 56px;
+}
+
+header {
+    background-image: url("https://www.ptfue.com/wp-content/uploads/2019/04/CIFPlogo_oficial_transparente.png");
+    background-size: 900px;
+    background-repeat: no-repeat;
+    background-position-y: 3%;
 }
