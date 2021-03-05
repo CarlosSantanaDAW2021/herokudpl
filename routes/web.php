@@ -17,6 +17,8 @@ use App\Http\Controllers\ComandasController;
 */
 
 Route::view("/", "index");
+Route::get("/pedido", [ComandasController::class, "getCreateComandas"]);
+Route::post("/pedido", [ComandasController::class, "postCreateComandas"]);
 
 Auth::routes(["verify" => "true"]);
 
@@ -37,22 +39,5 @@ Route::group(["middleware" => "verified"], function() {
     Route::put("/admin/clientes/edit/{id}", [ClientesController::class, "putEditClientes"]);
     Route::delete("/admin/clientes/delete/{id}", [ClientesController::class, "deleteClientes"]);
 
-    
-});
-//rutas comandas
-Route::get("/comandas/show",[ComandasController::class,"showComandas"]);
-Route::get("/comandas/edit/{id}",[ComandasController::class,"getEditComandas"]);
-Route::get("/comandas/create",[ComandasController::class,"getCreateComandas"]);
-Route::post("/comandas/create",[ComandasController::class,"postCreateComandas"]);
-Route::put("/comandas/edit",[ComandasController::class,"putEditComandas"]);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/pedido',function(){
-    return view('formulario');
-
-
-
-
-
+    Route::get("/admin/comandas/show", [ComandasController::class, "showComandas"]);
 });
