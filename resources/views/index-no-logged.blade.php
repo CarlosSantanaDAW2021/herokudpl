@@ -18,7 +18,7 @@
         <img class="card-img-top" src="{{$producto->imagen}}" alt="">
         <div class="card-body">
           <h4 class="card-title">{{$producto->nombre}}</h4>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+          <p class="card-text">{{$producto->descripcion}}</p>
         </div>
         <div class="card-footer">
           <a href="#" class="btn btn-primary">Find Out More!</a>

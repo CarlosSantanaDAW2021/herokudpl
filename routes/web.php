@@ -18,7 +18,7 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'indexNoLogged']);
+Route::get('/', [ProductosController::class ,"getProductos"]);
 
 Auth::routes(["verify" => "true"]);
 

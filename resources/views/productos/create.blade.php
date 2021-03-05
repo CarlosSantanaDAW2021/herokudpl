@@ -39,6 +39,11 @@
                             <label for="precio">Precio</label>
                             <input type="text" name="precio" id="precio" class="form-control" value="{{old('precio')}}">
                         </div>
+
+                        <div class="form-group">
+                            <label for="precio">Descripcion</label>
+                            <input type="text" name="descripcion" id="precio" class="form-control" value="{{old('descripcion')}}">
+                        </div>
                     
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">

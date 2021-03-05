@@ -10,7 +10,11 @@ body {
 
 header {
     background-image: url("https://www.ptfue.com/wp-content/uploads/2019/04/CIFPlogo_oficial_transparente.png");
-    background-size: 900px;
+    background-size: 250px;
     background-repeat: no-repeat;
     background-position-y: 3%;
+}
+
+h1.display-3 {
+    margin-left: 20%;
 }

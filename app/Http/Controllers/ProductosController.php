@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ProductosController extends Controller
 {
     // TODO: mostrar productos en pagina principal
     public function getProductos() {
+        $producto = DB::table('productos')->get();
+        return view('index-no-logged',['productos'=> DB::table('productos')->paginate(10)],["productos" => $producto]);
 
     }
 
@@ -29,7 +32,8 @@ class ProductosController extends Controller
         $validator = Validator::make($request->all(), [
             "nombre" => "required|string|max:255",
             "imagen" => "required|mimes:png,jpg|max:2048",
-            "precio" => "required|numeric|gte:0"
+            "precio" => "required|numeric|gte:0",
+            "descripcion" => "required|string|max:255"
         ]);
 
         if ($validator->fails()) {
@@ -44,6 +48,7 @@ class ProductosController extends Controller
         $producto->nombre = $request->input("nombre");
         $producto->imagen = asset("storage/" . $request->file("imagen")->hashName());
         $producto->precio = $request->input("precio");
+        $producto->descripcion = $request->input("descripcion");
         $producto->save();
 
         $request->session()->flash("correcto", "Se ha creado el producto");
