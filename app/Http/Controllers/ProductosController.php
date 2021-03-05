@@ -12,7 +12,7 @@ class ProductosController extends Controller
     // mostrar productos en pagina principal
     public function getProductos() {
         $producto = DB::table('productos')->get();
-        return view('index',['productos'=> DB::table('productos')->paginate(10)],["productos" => $producto]);
+        return view('index',['productos'=> DB::table('productos')->paginate(8)],["productos" => $producto]);
 
     }
 
