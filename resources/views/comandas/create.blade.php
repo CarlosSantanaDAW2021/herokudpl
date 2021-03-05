@@ -1,4 +1,5 @@
 @extends("layouts.app")
+@extends("partials.form-partial")
 @section('content')
 <div class="row" style="margin-top:40px">
    <div class="offset-md-3 col-md-6">
