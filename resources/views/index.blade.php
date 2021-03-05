@@ -8,7 +8,7 @@
   <header class="jumbotron my-4">
     <h1 class="display-3">Bienvenido a la página de la cafetería del centro majada marcial</h1>
     <p class="lead">Realiza tu pedido sin necesidad de esperar largas colas </p>
-    <a href="{{url('/comandas/create')}}" class="btn btn-primary btn-lg">Haz tu pedido</a>
+    <a href="{{url('/pedido')}}" class="btn btn-primary btn-lg">Haz tu pedido</a>
   </header>
 
   <!-- Page Features -->
