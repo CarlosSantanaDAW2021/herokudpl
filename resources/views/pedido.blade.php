@@ -1,10 +1,10 @@
 @extends("layouts.main")
 @section("content")
-    <h1>Realizar un pedido</h1>
+    <h1 class="h1pedido">Realizar un pedido</h1>
 
     <div class="row" style="margin-top:40px">
         <div class="offset-md-3 col-md-6">
-            <div class="card">
+            <div class="card" id="comanda">
                 <div class="card-header text-center">
                     Crear comanda
                 </div>

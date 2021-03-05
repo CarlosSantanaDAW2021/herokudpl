@@ -5,7 +5,7 @@
 <div class="container" >
 
   <!-- Jumbotron Header -->
-  <header class="jumbotron my-4">
+  <header class="jumbotron my-3">
     <h1 class="display-3">Bienvenido a la página de la cafetería del centro majada marcial</h1>
     <p class="lead">Realiza tu pedido sin necesidad de esperar largas colas </p>
     <a href="{{url('/pedido')}}" class="btn btn-primary btn-lg">Haz tu pedido</a>

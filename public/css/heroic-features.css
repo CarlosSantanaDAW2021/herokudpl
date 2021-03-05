@@ -6,6 +6,7 @@
 
 body {
     padding-top: 56px;
+    background-color: black;
 }
 
 header {
@@ -17,6 +18,16 @@ header {
 
 h1.display-3 {
     margin-left: 20%;
+}
+
+h1.h1pedido {
+    color: white;
+    text-align: center;
+    margin-top: 3%;
+}
+
+div#comanda {
+    margin-bottom: 5%;
 }
 
 .card-body {
