@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Http\Requests\ClienteFormRequest;
 
 class ClientesController extends Controller
 {
@@ -21,18 +22,9 @@ class ClientesController extends Controller
     }
 
     // Editar un cliente según el formulario anterior
-    public function putEditClientes($id, Request $request) {
-        $validator = Validator::make($request->all(), [
-            "name" => "required|string|max:255",
-            "email" => "required|email|max:255",
-            "telefono" => "required|digits:9"
-        ]);
+    public function putEditClientes($id, ClienteFormRequest $request) {
 
-        if ($validator->fails()) {
-            return redirect("/admin/clientes/edit/" . $id)
-                    ->withErrors($validator)
-                    ->withInput();
-        }
+        $validator = $request->validated();
 
         $cliente = User::findOrFail($id);
         $cliente->name = $request->input("name");
