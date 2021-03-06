@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\ProductoFormRequest;
+
 
 class ProductosController extends Controller
 {
@@ -28,19 +30,8 @@ class ProductosController extends Controller
     }
 
     // Crea un producto a partir del formulario anterior
-    public function postCreateProductos(Request $request) {
-        $validator = Validator::make($request->all(), [
-            "nombre" => "required|string|max:255",
-            "imagen" => "required|mimes:png,jpg|max:2048",
-            "precio" => "required|numeric|gte:0",
-            "descripcion" => "required|string|max:255"
-        ]);
-
-        if ($validator->fails()) {
-            return redirect("/admin/productos/create")
-                    ->withErrors($validator)
-                    ->withInput();
-        }
+    public function postCreateProductos(ProductoFormRequest $request) {
+        $validator = $request->validated();
 
         $request->file("imagen")->store("public");
 
@@ -63,20 +54,8 @@ class ProductosController extends Controller
     }
 
     // Editar un producto según el formulario anterior
-    public function putEditProductos($id, Request $request) {
-        $validator = Validator::make($request->all(), [
-            "nombre" => "required|string|max:255",
-            "imagen" => "required|mimes:png,jpg|max:2048",
-            "precio" => "required|numeric|gte:0",
-            "descripcion"=> "required|string|max:255"
-        ]);
-
-        if ($validator->fails()) {
-            return redirect("/admin/productos/edit/" . $id)
-                    ->withErrors($validator)
-                    ->withInput();
-        }
-
+    public function putEditProductos($id,ProductoFormRequest $request) {
+        $validator = $request->validated();
         $request->file("imagen")->store("public");
 
         $producto = Producto::findOrFail($id);
