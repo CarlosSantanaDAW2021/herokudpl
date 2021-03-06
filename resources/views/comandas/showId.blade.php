@@ -20,15 +20,8 @@
                     <td>{{ $producto->cantidad }}</td>
                     <td>{{ $producto->precio }}</td>
                     <td><a class="btn btn-warning" href="{{url('/admin/comandas/edit/' . $producto->idComanda . '/' . $producto->idProducto)}}">Editar</a></td>
-                    <td>
-                        <form method="post" action="{{url('/admin/comandas/delete/' . $producto->idComanda . '/' . $producto->idProducto)}}" style="display:inline">
-                            @method("DELETE")
-                            @csrf
-                            <button type="submit" class="btn btn-danger" role="button">
-                                Eliminar
-                            </button>
-                        </form>
-                    </td>
+                    <td><a class="btn btn-danger" data-target="#delete-{{ $producto->idComanda }}-{{ $producto->idProducto }}" data-toggle="modal">Eliminar</a></td>
+                    @include("comandas.delete-single-modal")
                 </tr>
             @endforeach
         </tbody>

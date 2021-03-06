@@ -146,10 +146,21 @@ class ComandasController extends Controller
     }
 
     public function deleteComandasSingle($idComanda, $idProducto, Request $request) {
+        $precioTotal = 0;
+        $comanda = Comanda::where("id", $idComanda)->firstOrFail();
+
         $comandaSingle = DB::table("comandas_productos")
                                 ->where("idComanda", $idComanda)
                                 ->where("idProducto", $idProducto)
                                 ->delete();
+
+        $comandasProductos = ComandasProductos::where("idComanda", $idComanda)->get();
+        foreach ($comandasProductos as $precio) {
+            $precioTotal += $precio->precio;
+        }
+
+        $comanda->precio = $precioTotal;
+        $comanda->save();
 
         $request->session()->flash("correcto", "Se ha borrado el producto de la comanda");
         return redirect("/admin/comandas/show/" . $idComanda);

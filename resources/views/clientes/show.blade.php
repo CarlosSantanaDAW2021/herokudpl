@@ -22,15 +22,8 @@
                     <td>{{ $cliente->email }}</td>
                     <td>{{ $cliente->telefono }}</td>
                     <td><a class="btn btn-warning" href="{{url('/admin/clientes/edit/' . $cliente->id)}}">Editar</a></td>
-                    <td>
-                        <form method="post" action="{{url('/admin/clientes/delete/' . $cliente->id)}}" style="display:inline">
-                            @method("DELETE")
-                            @csrf
-                            <button type="submit" class="btn btn-danger" role="button">
-                                Eliminar
-                            </button>
-                        </form>
-                    </td>
+                    <td><a class="btn btn-danger" data-target="#delete-{{ $cliente->id }}" data-toggle="modal">Eliminar</a></td>
+                    @include("clientes.delete-modal")
                 </tr>
             @endforeach
         </tbody>

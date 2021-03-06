@@ -24,15 +24,8 @@
                     <td>{{ $comanda->precio }}</td>
                     <td><a class="btn btn-info" href="{{url('/admin/comandas/show/' . $comanda->id)}}">Ver detalles</a></td>
                     <td><a class="btn btn-warning" href="{{url('/admin/comandas/edit/' . $comanda->id)}}">Cambiar estado</a></td>
-                    <td>
-                        <form method="post" action="{{url('/admin/comandas/delete/' . $comanda->id)}}" style="display:inline">
-                            @method("DELETE")
-                            @csrf
-                            <button type="submit" class="btn btn-danger" role="button">
-                                Eliminar
-                            </button>
-                        </form>
-                    </td>
+                    <td><a class="btn btn-danger" data-target="#delete-{{ $comanda->id }}" data-toggle="modal">Eliminar</a></td>
+                    @include("comandas.delete-modal")
                 </tr>
             @endforeach
         </tbody>
