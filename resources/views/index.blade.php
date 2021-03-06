@@ -26,7 +26,7 @@
     </div>
     @endforeach
   </div>  
-  {{$productos = DB::table('productos')->simplePaginate(10)}}
+  {{$productos = DB::table('productos')->simplePaginate(8)}}
   <br>
 </div>
 <!-- /.container -->
