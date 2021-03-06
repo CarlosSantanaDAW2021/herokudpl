@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Http\Requests\ClienteFormRequest;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class ClientesController extends Controller
 {
@@ -13,6 +15,24 @@ class ClientesController extends Controller
     public function showClientes() {
         $clientes = User::all();
         return view("clientes.show", ["clientes" => $clientes]);
+    }
+
+    public function showHistorial() {
+        $comandas = DB::table("comandas")
+                        ->where("idCliente", Auth::user()->id)
+                        ->get();
+
+        return view("clientes.historial", ["comandas" => $comandas]);
+    }
+
+    public function showComanda($id) {
+        $productos = DB::table("comandas_productos")
+                            ->where("idComanda", $id)
+                            ->join("productos", "comandas_productos.idProducto", "=", "productos.id")
+                            ->select("comandas_productos.*", "productos.nombre")
+                            ->get();
+        
+        return view("clientes.comanda", ["productos" => $productos]);
     }
 
     // Mostrar formulario para editar cliente

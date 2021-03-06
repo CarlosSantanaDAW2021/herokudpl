@@ -8,6 +8,7 @@
         <thead>
             <th scope="col">Producto</th>
             <th scope="col">Cantidad</th>
+            <th scope="col">Precio</th>
             <th scope="col"></th>
             <th scope="col"></th>
         </thead>
@@ -17,6 +18,7 @@
                 <tr>
                     <td>{{ $producto->nombre }}</td>
                     <td>{{ $producto->cantidad }}</td>
+                    <td>{{ $producto->precio }}</td>
                     <td><a class="btn btn-warning" href="{{url('/admin/comandas/edit/' . $producto->idComanda . '/' . $producto->idProducto)}}">Editar</a></td>
                     <td>
                         <form method="post" action="{{url('/admin/comandas/delete/' . $producto->idComanda . '/' . $producto->idProducto)}}" style="display:inline">

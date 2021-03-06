@@ -18,6 +18,7 @@ class CreateComandas extends Migration
             $table->unsignedBigInteger("idCliente");
             $table->timestamps();
             $table->enum("estado", ["PEDIDO", "PAGADO", "ENTREGADO"]);
+            $table->float("precio", 5, 2);
             $table->foreign("idCliente")->references("id")->on("users")->onDelete("cascade");
         });
     }

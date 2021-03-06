@@ -30,6 +30,10 @@
             <li class="nav-item">
               <a class="nav-link" href="/admin">{{ __('Panel de administración') }}</a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/usuario/historial">{{ __('Mi historial') }}</a>
+            </li>
             
             @guest
               @if (Route::has('login'))

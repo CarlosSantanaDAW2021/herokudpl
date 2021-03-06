@@ -40,6 +40,8 @@ class ComandasController extends Controller
 
     // Crea una comanda a partir del formulario anterior
     public function postCreateComandas(Request $request) {
+        $precioTotal = 0;
+
         $inputs = $request->all();
         unset($inputs["_method"]);
         unset($inputs["_token"]);
@@ -59,14 +61,25 @@ class ComandasController extends Controller
         $comanda = new Comanda;
         $comanda->idCliente = Auth::user()->id;
         $comanda->estado = "PEDIDO";
+        $comanda->precio = 0;
         $comanda->save();
+
         foreach ($inputs as $key => $value) {
+            $precioProducto = Producto::findOrFail($key);
+
+            $precio = $precioProducto["precio"] * $value;
+            $precioTotal += $precio;
+
             $pivote = new ComandasProductos;
             $pivote->idComanda = $comanda->id;
             $pivote->idProducto = $key;
             $pivote->cantidad = $value;
+            $pivote->precio = $precio;
             $pivote->save();
         }
+
+        $comanda->precio = $precioTotal;
+        $comanda->save();
 
         $request->session()->flash("correcto", "Se ha realizado su pedido");
         return redirect("/");
@@ -101,10 +114,23 @@ class ComandasController extends Controller
 
     // Editar una comanda según el formulario anterior
     public function putEditComandasSingle($idComanda, $idProducto, Request $request) {
-        $comanda = DB::table("comandas_productos")
-                        ->where("idComanda", $idComanda)
-                        ->where("idProducto", $idProducto)
-                        ->update(["cantidad" => $request->input("cantidad")]);
+        $precioTotal = 0;
+        $producto = Producto::where("id", $idProducto)->firstOrFail();
+        $comanda = Comanda::where("id", $idComanda)->firstOrFail();
+
+        $cantidad = $request->input("cantidad");
+        $comandaProducto = DB::table("comandas_productos")
+                                ->where("idComanda", $idComanda)
+                                ->where("idProducto", $idProducto)
+                                ->update(["cantidad" => $cantidad, "precio" => $producto->precio * $cantidad]);
+
+        $comandasProductos = ComandasProductos::where("idComanda", $idComanda)->get();
+        foreach ($comandasProductos as $precio) {
+            $precioTotal += $precio->precio;
+        }
+
+        $comanda->precio = $precioTotal;
+        $comanda->save();
 
         $request->session()->flash("correcto", "Se ha editado la comanda");
         return redirect("/admin/comandas/show/" . $idComanda);

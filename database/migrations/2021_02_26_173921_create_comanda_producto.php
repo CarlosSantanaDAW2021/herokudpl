@@ -18,6 +18,7 @@ class CreateComandaProducto extends Migration
             $table->unsignedBigInteger("idProducto");
             $table->timestamps();
             $table->tinyInteger("cantidad");
+            $table->float("precio", 5, 2);
 
             $table->foreign("idComanda")->references("id")->on("comandas")->onDelete("cascade");
             $table->foreign("idProducto")->references("id")->on("productos")->onDelete("cascade");
