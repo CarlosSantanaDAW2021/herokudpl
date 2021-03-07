@@ -21,6 +21,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [ProductosController::class ,"getProductos"]);
 Route::get("/pedido", [ComandasController::class, "getCreateComandas"]);
 Route::post("/pedido", [ComandasController::class, "postCreateComandas"]);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes(["verify" => "true"]);
 
@@ -68,5 +69,5 @@ Route::group(["middleware" => "verified"], function() {
     Route::delete("/admin/comandas/delete/{id}", [ComandasController::class, "deleteComandas"]);
     Route::delete("/admin/comandas/delete/{idComanda}/{idProducto}", [ComandasController::class, "deleteComandasSingle"]);
 });
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-});
+
+
