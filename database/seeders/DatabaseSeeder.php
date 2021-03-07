@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('productos')->delete();
-        Producto::factory()->count(50)->create();
+        \DB::table('productos')->delete(); // Eliminamos la tabla productos
+        Producto::factory()->count(50)->create(); // La recreamos con 50 productos test
     }
 }

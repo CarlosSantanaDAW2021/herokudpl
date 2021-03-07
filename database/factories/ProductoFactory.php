@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Producto;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+// Crea 50 productos para testear la página principal
 class ProductoFactory extends Factory
 {
     /**
@@ -23,7 +24,7 @@ class ProductoFactory extends Factory
         return [
          'nombre'=>$this->faker->Name,
          'precio'=>$this->faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 30),
-         'imagen'=> url("/storage/test.png"),
+         'imagen'=> url("/storage/test.png"), // Asignamos una imagen test.png a todos los productos
          'descripcion'=>$this->faker->text
         ];
     }

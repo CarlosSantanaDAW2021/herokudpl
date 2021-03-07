@@ -44,6 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    // Relacion 1:n con comandas
     public function comandas() {
         return $this->hasMany("\App\Models\Comanda");
     }
