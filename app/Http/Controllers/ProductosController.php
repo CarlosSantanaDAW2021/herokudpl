@@ -11,7 +11,7 @@ use App\Http\Requests\ProductoFormRequest;
 
 class ProductosController extends Controller
 {
-    // mostrar productos en pagina principal
+    // Mostrar productos en pagina principal
     public function getProductos(Request $request) {
         $texto = trim($request->get("texto"));
         $productos = DB::table("productos")

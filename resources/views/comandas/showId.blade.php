@@ -4,6 +4,7 @@
         <div class="alert alert-success">{{Session::get("correcto")}}</div>
     @endif
     
+    <a class="btn btn-success" href="{{ url('/admin/comandas/create/' . $id) }}">Añadir producto</a>
     <table class="table">
         <thead>
             <th scope="col">Producto</th>

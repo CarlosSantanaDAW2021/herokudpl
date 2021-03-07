@@ -29,7 +29,7 @@ class ComandasController extends Controller
                             ->select("comandas_productos.*", "productos.nombre")
                             ->get();
         
-        return view("comandas.showId", ["productos" => $productos]);
+        return view("comandas.showId", ["productos" => $productos, "id" => $id]);
     }
 
     // Muestra el formulario para crear comandas
@@ -85,6 +85,46 @@ class ComandasController extends Controller
         return redirect("/");
     }
 
+    public function getCreateSingle($id) {
+        $productos = Producto::all();
+        $comandasProductos = ComandasProductos::where("idComanda", $id)->get();
+        $idsProducto = [];
+
+        foreach ($comandasProductos as $key => $comandaProducto) {
+            $idsProducto[] = $comandaProducto->idProducto;
+        }
+
+        return view("comandas.create-single", ["idsProducto" => $idsProducto, "productos" => $productos]);
+    }
+
+    public function postCreateSingle($id, Request $request) {
+        $validator = Validator::make($request->all(), [
+            "idProducto" => "integer|gte:0",
+            "cantidad" => "required|integer|gte:0"
+        ]);
+
+        if ($validator->fails()) {
+            return redirect("/admin/comandas/create/" . $id)
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+
+        $producto = Producto::where("id", $request->input("idProducto"))->firstOrFail();
+        $precio = $producto->precio * $request->input("cantidad");
+
+        $registro = new ComandasProductos;
+        $registro->idComanda = $id;
+        $registro->idProducto = $request->input("idProducto");
+        $registro->cantidad = $request->input("cantidad");
+        $registro->precio = $precio;
+        $registro->save();
+
+        $this->recalcularPrecioTotal($id);
+
+        $request->session()->flash("correcto", "Se ha añadido el producto a la comanda");
+        return redirect("/admin/comandas/show/" . $id);
+    }
+
     // Mostrar formulario para editar comanda
     public function getEditComandas($id) {
         $comanda = Comanda::findOrFail($id);
@@ -114,23 +154,15 @@ class ComandasController extends Controller
 
     // Editar una comanda según el formulario anterior
     public function putEditComandasSingle($idComanda, $idProducto, Request $request) {
-        $precioTotal = 0;
         $producto = Producto::where("id", $idProducto)->firstOrFail();
-        $comanda = Comanda::where("id", $idComanda)->firstOrFail();
 
         $cantidad = $request->input("cantidad");
         $comandaProducto = DB::table("comandas_productos")
                                 ->where("idComanda", $idComanda)
                                 ->where("idProducto", $idProducto)
                                 ->update(["cantidad" => $cantidad, "precio" => $producto->precio * $cantidad]);
-
-        $comandasProductos = ComandasProductos::where("idComanda", $idComanda)->get();
-        foreach ($comandasProductos as $precio) {
-            $precioTotal += $precio->precio;
-        }
-
-        $comanda->precio = $precioTotal;
-        $comanda->save();
+                                
+        $this->recalcularPrecioTotal($idComanda);
 
         $request->session()->flash("correcto", "Se ha editado la comanda");
         return redirect("/admin/comandas/show/" . $idComanda);
@@ -146,23 +178,28 @@ class ComandasController extends Controller
     }
 
     public function deleteComandasSingle($idComanda, $idProducto, Request $request) {
-        $precioTotal = 0;
-        $comanda = Comanda::where("id", $idComanda)->firstOrFail();
-
         $comandaSingle = DB::table("comandas_productos")
                                 ->where("idComanda", $idComanda)
                                 ->where("idProducto", $idProducto)
                                 ->delete();
 
+        $this->recalcularPrecioTotal($idComanda);
+
+        $request->session()->flash("correcto", "Se ha borrado el producto de la comanda");
+        return redirect("/admin/comandas/show/" . $idComanda);
+    }
+
+    // Utilidad para recalcular el precio total de la comanda con el id $idComanda
+    public function recalcularPrecioTotal($idComanda) {
+        $precioTotal = 0;
+        $comanda = Comanda::where("id", $idComanda)->firstOrFail();
         $comandasProductos = ComandasProductos::where("idComanda", $idComanda)->get();
-        foreach ($comandasProductos as $precio) {
-            $precioTotal += $precio->precio;
+        
+        foreach ($comandasProductos as $comandaProducto) {
+            $precioTotal += $comandaProducto->precio;
         }
 
         $comanda->precio = $precioTotal;
         $comanda->save();
-
-        $request->session()->flash("correcto", "Se ha borrado el producto de la comanda");
-        return redirect("/admin/comandas/show/" . $idComanda);
     }
 }

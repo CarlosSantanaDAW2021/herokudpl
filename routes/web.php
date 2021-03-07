@@ -47,6 +47,8 @@ Route::group(["middleware" => "verified"], function() {
     //rutas comandas
     Route::get("/admin/comandas/show", [ComandasController::class, "showComandas"]);
     Route::get("/admin/comandas/show/{id}", [ComandasController::class, "showComandasId"]);
+    Route::get("/admin/comandas/create/{id}", [ComandasController::class, "getCreateSingle"]);
+    Route::post("/admin/comandas/create/{id}", [ComandasController::class, "postCreateSingle"]);
     Route::get("/admin/comandas/edit/{id}", [ComandasController::class, "getEditComandas"]);
     Route::put("/admin/comandas/edit/{id}", [ComandasController::class, "putEditComandas"]);
     Route::get("/admin/comandas/edit/{idComanda}/{idProducto}", [ComandasController::class, "getEditComandasSingle"]);
