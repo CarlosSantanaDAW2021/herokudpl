@@ -16,11 +16,13 @@ use App\Http\Controllers\HomeController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/https://Carlos_Santana_DAW@bitbucket.org/alejandroNikiperovich/cafeteria.git
+*/
 
 Route::get('/', [ProductosController::class ,"getProductos"]);
 Route::get("/pedido", [ComandasController::class, "getCreateComandas"]);
 Route::post("/pedido", [ComandasController::class, "postCreateComandas"]);
+Route::get('/busqueda',[ProductosController::class,"GetBusqueda"]);
+
 
 Auth::routes(["verify" => "true"]);
 

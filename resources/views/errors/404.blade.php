@@ -3,9 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>404</title>
+        <link href="css/heroic-features.css" rel="stylesheet">
+        <title>Página no encontrada</title>
     </head>
 
-    <body style="background-image: url({{asset ('images/error404.jpg')}}); background-repeat: no-repeat; background-attachment: fixed; position:relative;"></body>
+    <body style ="background-color: black;" >
+    <img src="{{asset('images/404.jpg')}}" alt="Error404" class="error">
+    </body>
 
 </html>

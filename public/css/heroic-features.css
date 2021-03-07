@@ -20,6 +20,24 @@ h1.display-3 {
     margin-left: 20%;
 }
 
+img.error {
+    background-position-y: 3%;
+    background-size: 500px;
+    margin-left: 25%;
+}
+
+th {
+    color: white;
+}
+
+.panel-heading {
+    color: white;
+}
+
+.label-control {
+    color: white;
+}
+
 h1.h1pedido {
     color: white;
     text-align: center;

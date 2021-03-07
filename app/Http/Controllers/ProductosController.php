@@ -13,9 +13,25 @@ class ProductosController extends Controller
 {
     // mostrar productos en pagina principal
     public function getProductos() {
-        $producto = DB::table('productos')->get();
-        return view('index',['productos'=> DB::table('productos')->paginate(8)],["productos" => $producto]);
+        
+        $producto = DB::table('productos')->get(); 
+        return view('index',['productos'=> DB::table('productos')->paginate(8)],["productos" => $producto]);   
+    }
 
+    //controlador para la busqueda
+    public function getBusqueda(Request $request){
+        $input = trim($request->get('texto'));
+        if($input){
+            $productos = DB::table('productos')
+                ->select()
+                ->where("nombre", "LIKE", "%.$input.%")
+                ->paginate(5);
+        
+        return view('busqueda',["producto"=>$productos])->with('buscar', $productos);
+        }
+        else{
+            return view('busqueda');
+        }
     }
 
     // Mostrar productos en admin
