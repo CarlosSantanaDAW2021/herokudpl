@@ -24,15 +24,8 @@
                     <td>{{ $producto->precio }}</td>
                     <td>{{ $producto->descripcion }}</td>
                     <td><a class="btn btn-warning" href="{{url('/admin/productos/edit/' . $producto->id)}}">Editar</a></td>
-                    <td>
-                        <form method="post" action="{{url('/admin/productos/delete/' . $producto->id)}}" style="display:inline">
-                            @method("DELETE")
-                            @csrf
-                            <button type="submit" class="btn btn-danger" role="button">
-                                Eliminar
-                            </button>
-                        </form>
-                    </td>
+                    <td><a class="btn btn-danger" data-target="#delete-{{ $producto->id }}" data-toggle="modal">Eliminar</a></td>
+                    @include("productos.delete-modal")
                 </tr>
             @endforeach
         </tbody>

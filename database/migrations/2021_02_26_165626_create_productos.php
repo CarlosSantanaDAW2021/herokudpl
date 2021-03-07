@@ -17,7 +17,7 @@ class CreateProductos extends Migration
             $table->id();
             $table->timestamps();
             $table->string("nombre", 255);
-            $table->float("precio", 4, 2);
+            $table->float("precio", 5, 2);
             $table->string("descripcion",255);
         });
     }

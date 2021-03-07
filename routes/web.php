@@ -43,6 +43,9 @@ Route::group(["middleware" => "verified"], function() {
     Route::put("/admin/clientes/edit/{id}", [ClientesController::class, "putEditClientes"]);
     Route::delete("/admin/clientes/delete/{id}", [ClientesController::class, "deleteClientes"]);
 
+    Route::get("/usuario/historial", [ClientesController::class, "showHistorial"]);
+    Route::get("/usuario/comanda/{id}", [ClientesController::class, "showComanda"]);
+
     //rutas comandas
     Route::get("/admin/comandas/show", [ComandasController::class, "showComandas"]);
     Route::get("/admin/comandas/show/{id}", [ComandasController::class, "showComandasId"]);
