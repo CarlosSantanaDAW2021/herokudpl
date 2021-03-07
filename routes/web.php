@@ -56,3 +56,5 @@ Route::group(["middleware" => "verified"], function() {
     Route::delete("/admin/comandas/delete/{id}", [ComandasController::class, "deleteComandas"]);
     Route::delete("/admin/comandas/delete/{idComanda}/{idProducto}", [ComandasController::class, "deleteComandasSingle"]);
 });
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
