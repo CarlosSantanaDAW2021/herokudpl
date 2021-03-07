@@ -25,7 +25,7 @@ class ProductosController extends Controller
             $productos = DB::table('productos')
                 ->select()
                 ->where("nombre", "LIKE", "%.$input.%")
-                ->paginate(5);
+                ->get();
         
         return view('busqueda',["producto"=>$productos])->with('buscar', $productos);
         }

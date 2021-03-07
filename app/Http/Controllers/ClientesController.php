@@ -16,7 +16,7 @@ class ClientesController extends Controller
         $clientes = User::all();
         return view("clientes.show", ["clientes" => $clientes]);
     }
-
+    //Mostrar historial del cliente
     public function showHistorial() {
         $comandas = DB::table("comandas")
                         ->where("idCliente", Auth::user()->id)
@@ -24,7 +24,7 @@ class ClientesController extends Controller
 
         return view("clientes.historial", ["comandas" => $comandas]);
     }
-
+    //Mostrar la comanda
     public function showComanda($id) {
         $productos = DB::table("comandas_productos")
                             ->where("idComanda", $id)
