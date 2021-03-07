@@ -19,8 +19,6 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [ProductosController::class ,"getProductos"]);
-Route::get("/pedido", [ComandasController::class, "getCreateComandas"]);
-Route::post("/pedido", [ComandasController::class, "postCreateComandas"]);
 
 Auth::routes(["verify" => "true"]);
 
