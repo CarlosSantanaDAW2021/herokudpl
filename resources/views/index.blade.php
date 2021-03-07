@@ -1,7 +1,13 @@
 @extends("layouts.main")
+@section("busqueda")
+  <form class="form-inline" action="{{ url('/') }}" method="GET">
+    <input type="search" class="form-control" name="texto" id="texto" placeholder="Buscar producto..." value="{{ $texto }}">
+    <button class="btn btn-primary" type="submit">Buscar</button>
+  </form>
+@stop
+
 @section("content")
 <!-- Page Content -->
-
 <div class="container" >
 
   <!-- Jumbotron Header -->

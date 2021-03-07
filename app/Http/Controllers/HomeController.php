@@ -25,7 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $producto = Producto::all();
-        return view('index',["productos" => $producto]);
+        
     }
 }
