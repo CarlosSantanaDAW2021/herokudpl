@@ -33,5 +33,6 @@ class InsertAdminUser extends Migration
     public function down()
     {
         $admin = User::findOrFail(0)->delete();
+        
     }
 }

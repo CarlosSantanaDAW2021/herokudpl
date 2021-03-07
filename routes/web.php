@@ -68,6 +68,7 @@ Route::group(["middleware" => "verified"], function() {
     Route::put("/admin/comandas/edit/{idComanda}/{idProducto}", [ComandasController::class, "putEditComandasSingle"]);
     Route::delete("/admin/comandas/delete/{id}", [ComandasController::class, "deleteComandas"]);
     Route::delete("/admin/comandas/delete/{idComanda}/{idProducto}", [ComandasController::class, "deleteComandasSingle"]);
+    
 });
 
 
