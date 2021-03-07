@@ -13,7 +13,6 @@ use App\Http\Requests\ProductoFormRequest;
 
 class ProductosController extends Controller
 {
-<<<<<<< HEAD
     // mostrar productos en pagina principal
     public function getProductos() {
         
@@ -34,7 +33,7 @@ class ProductosController extends Controller
         }
         else{
             return view('busqueda');
-=======
+            
     // Mostrar productos en pagina principal
     public function getProductos(Request $request) {
         if (Auth::check()) {
@@ -43,7 +42,6 @@ class ProductosController extends Controller
             $rol = $usuario->rol;
         } else {
             $rol = "NOTHING";
->>>>>>> 37500d8f01c7e2ed5705628d7a980adeb5141380
         }
 
         $texto = trim($request->get("texto"));
