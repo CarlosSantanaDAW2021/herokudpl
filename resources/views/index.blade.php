@@ -1,4 +1,19 @@
 @extends("layouts.main")
+
+@section("links-roles")
+  @if ($rol == "ADMIN")
+  <li class="nav-item">
+    <a class="nav-link" href="/admin">{{ __('Panel de administración') }}</a>
+  </li>
+  @endif
+
+  @if ($rol == "CLIENTE" || $rol == "ADMIN")
+  <li class="nav-item">
+    <a class="nav-link" href="/usuario/historial">{{ __('Mi historial') }}</a>
+  </li>
+  @endif
+@stop
+
 @section("busqueda")
   <form class="form-inline" action="{{ url('/') }}" method="GET">
     <input type="search" class="form-control" name="texto" id="texto" placeholder="Buscar producto..." value="{{ $texto }}">
@@ -9,6 +24,19 @@
 @section("content")
 <!-- Page Content -->
 <div class="container" >
+  @if ($errors->any())
+    <div class="row justify-content-center" style="margin-top:40px">
+        <div class="col-sm-7">
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+  @endif
 
   <!-- Jumbotron Header -->
   <header class="jumbotron my-3">

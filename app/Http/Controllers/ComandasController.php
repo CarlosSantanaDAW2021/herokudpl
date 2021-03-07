@@ -34,8 +34,16 @@ class ComandasController extends Controller
 
     // Muestra el formulario para crear comandas
     public function getCreateComandas() {
+        if (Auth::check()) {
+            $id = Auth::user()->id ?? "NOTHING";
+            $usuario = User::findOrFail($id);
+            $rol = $usuario->rol;
+        } else {
+            $rol = "NOTHING";
+        }
+
         $productos = Producto::all();
-        return view('pedido', ["productos" => $productos]);
+        return view('pedido', ["productos" => $productos, "rol" => $rol]);
     }
 
     // Crea una comanda a partir del formulario anterior

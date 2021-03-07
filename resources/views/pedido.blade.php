@@ -1,4 +1,19 @@
 @extends("layouts.main")
+
+@section("links-roles")
+  @if ($rol == "ADMIN")
+  <li class="nav-item">
+    <a class="nav-link" href="/admin">{{ __('Panel de administración') }}</a>
+  </li>
+  @endif
+
+  @if ($rol == "CLIENTE" || $rol == "ADMIN")
+  <li class="nav-item">
+    <a class="nav-link" href="/usuario/historial">{{ __('Mi historial') }}</a>
+  </li>
+  @endif
+@stop
+
 @section("content")
     <h1 class="h1pedido">Realizar un pedido</h1>
     <div class="row" style="margin-top:40px">

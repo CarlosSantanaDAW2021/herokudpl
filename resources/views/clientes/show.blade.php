@@ -1,4 +1,13 @@
 @extends("layouts.admin-main")
+
+@section("panel-admin")
+    @include("partials.panel-admin")
+@stop
+
+@section("mostrar-ocultar")
+    @include("partials.mostrar-ocultar")
+@stop
+
 @section("content")
     @if(Session::has("correcto"))
         <div class="alert alert-success">{{Session::get("correcto")}}</div>
