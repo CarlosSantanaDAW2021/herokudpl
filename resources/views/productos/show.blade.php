@@ -22,6 +22,7 @@
             <th scope="col">Descripción</th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </thead>
 
         <tbody>
@@ -33,6 +34,7 @@
                     <td>{{ $producto->precio }}</td>
                     <td>{{ $producto->descripcion }}</td>
                     <td><a class="btn btn-warning" href="{{url('/admin/productos/edit/' . $producto->id)}}">Editar</a></td>
+                    <td><a class="btn btn-warning" href="{{url('/admin/productos/imagen/' . $producto->id)}}">Cambiar imagen</a></td>
                     <td><a class="btn btn-danger" data-target="#delete-{{ $producto->id }}" data-toggle="modal">Eliminar</a></td>
                     @include("productos.delete-modal")
                 </tr>

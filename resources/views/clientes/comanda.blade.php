@@ -1,13 +1,10 @@
 @extends("layouts.admin-main")
 @section("content")
-    @if(Session::has("correcto"))
-        <div class="alert alert-success">{{Session::get("correcto")}}</div>
-    @endif
-    
     <table class="table">
         <thead>
             <th scope="col">Producto</th>
             <th scope="col">Cantidad</th>
+            <th scope="col">Precio</th>
         </thead>
 
         <tbody>
@@ -15,6 +12,7 @@
                 <tr>
                     <td>{{ $producto->nombre }}</td>
                     <td>{{ $producto->cantidad }}</td>
+                    <td>{{ $producto->precio }}</td>
                 </tr>
             @endforeach
         </tbody>

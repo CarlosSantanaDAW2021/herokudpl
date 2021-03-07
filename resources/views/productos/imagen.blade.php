@@ -1,22 +1,16 @@
-@extends("layouts.main")
+@extends("layouts.admin-main")
 
-@section("links-roles")
-  @if ($rol == "ADMIN")
-  <li class="nav-item">
-    <a class="nav-link" href="/admin">{{ __('Panel de administración') }}</a>
-  </li>
-  @endif
+@section("panel-admin")
+    @include("partials.panel-admin")
+@stop
 
-  @if ($rol == "CLIENTE" || $rol == "ADMIN")
-  <li class="nav-item">
-    <a class="nav-link" href="/usuario/historial">{{ __('Mi historial') }}</a>
-  </li>
-  @endif
+@section("mostrar-ocultar")
+    @include("partials.mostrar-ocultar")
 @stop
 
 @section("content")
-@if ($errors->any())
-    <div class="row justify-content-center">
+    @if ($errors->any())
+    <div class="row justify-content-center" style="margin-top:40px">
         <div class="col-sm-7">
             <div class="alert alert-danger">
                 <ul>
@@ -27,28 +21,28 @@
             </div>
         </div>
     </div>
-@endif
+    @endif
 
-    <h1 class="h1pedido">Realizar un pedido</h1>
     <div class="row" style="margin-top:40px">
         <div class="offset-md-3 col-md-6">
-            <div class="card" id="comanda">
+            <div class="card">
                 <div class="card-header text-center">
-                    Crear comanda
+                    Cambiar imagen
                 </div>
                 
                 <div class="card-body" style="padding:30px">
-                    <form method="post">
-                        @method("POST")
+                    <form method="post" enctype="multipart/form-data">
+                        @method("PUT")
                         @csrf
-                        
-                        @foreach($productos as $key => $producto)
-                            @include("partials.input-comanda")
-                        @endforeach
+
+                        <div class="form-group">
+                            <label for="imagen">Imagen de portada</label>
+                            <input type="file" name="imagen" id="imagen" class="form-control" value="{{old('imagen')}}">
+                        </div>
                     
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
-                                Realizar pedido
+                                Cambiar imagen
                             </button>
                         </div>
                     </form>

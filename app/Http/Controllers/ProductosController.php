@@ -60,7 +60,6 @@ class ProductosController extends Controller
     }
 
     // Mostrar formulario para editar producto
-    // TODO: modificar vista para que muestre la imagen
     public function getEditProductos($id) {
         $producto = Producto::findOrFail($id);
         return view("productos.edit", ["producto" => $producto]);
@@ -69,16 +68,36 @@ class ProductosController extends Controller
     // Editar un producto según el formulario anterior
     public function putEditProductos($id,ProductoFormRequest $request) {
         $validator = $request->validated();
-        $request->file("imagen")->store("public");
 
         $producto = Producto::findOrFail($id);
         $producto->nombre = $request->input("nombre");
-        $producto->imagen = asset("storage/" . $request->file("imagen")->hashName());
         $producto->precio = $request->input("precio");
         $producto->descripcion = $request->input("descripcion");
         $producto->save();
 
         $request->session()->flash("correcto", "Se ha editado el producto");
+        return redirect("/admin/productos/show");
+    }
+
+    public function getImagen($id) {
+        return view("productos.imagen");
+    }
+
+    public function putImagen($id, Request $request) {
+        $validator = Validator::make($request->all(), ["imagen" => "required|mimes:png,jpg|max:2048"]);
+        if ($validator->fails()) {
+            return redirect("/admin/comandas/imagen/" . $id)
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+
+        $request->file("imagen")->store("public");
+
+        $producto = Producto::findOrFail($id);
+        $producto->imagen = asset("storage/" . $request->file("imagen")->hashName());
+        $producto->save();
+
+        $request->session()->flash("correcto", "Se ha cambiado la imagen");
         return redirect("/admin/productos/show");
     }
 

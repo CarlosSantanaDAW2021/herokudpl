@@ -23,7 +23,7 @@ class ProductoFactory extends Factory
         return [
          'nombre'=>$this->faker->Name,
          'precio'=>$this->faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 30),
-         'imagen'=>$this->faker->text,
+         'imagen'=> "test.png",
          'descripcion'=>$this->faker->text
         ];
     }
