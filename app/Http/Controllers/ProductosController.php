@@ -13,29 +13,9 @@ use App\Http\Requests\ProductoFormRequest;
 
 class ProductosController extends Controller
 {
-    // mostrar productos en pagina principal
-    public function getProductos() {
-        
-        $producto = DB::table('productos')->get(); 
-        return view('index',['productos'=> DB::table('productos')->paginate(8)],["productos" => $producto]);   
-    }
-
-    //controlador para la busqueda
-    public function getBusqueda(Request $request){
-        $input = trim($request->get('texto'));
-        if($input){
-            $productos = DB::table('productos')
-                ->select()
-                ->where("nombre", "LIKE", "%.$input.%")
-                ->get();
-        
-        return view('busqueda',["producto"=>$productos])->with('buscar', $productos);
-        }
-        else{
-            return view('busqueda');
-            
-    // Mostrar productos en pagina principal
+    // Muestra los productos en la pagina principal
     public function getProductos(Request $request) {
+        // Guardamos el rol para saber qué botones mostrar en el navegador
         if (Auth::check()) {
             $id = Auth::user()->id ?? "NOTHING";
             $usuario = User::findOrFail($id);
@@ -44,7 +24,8 @@ class ProductosController extends Controller
             $rol = "NOTHING";
         }
 
-        $texto = trim($request->get("texto"));
+        $texto = trim($request->get("texto")); // Guardamos la búsqueda
+        // Mostramos los productos según la búsqueda y paginamos ocho por página
         $productos = DB::table("productos")
                         ->where("nombre", "LIKE", "%" . $texto . "%")
                         ->paginate(8);
@@ -52,7 +33,7 @@ class ProductosController extends Controller
         return view('index', compact("productos", "texto", "rol"));
     }
 
-    // Mostrar productos en admin
+    // Muestra productos en el panel de administración
     public function showProductos() {
         $productos = Producto::all();
         return view("productos.show", ["productos" => $productos]);
@@ -67,11 +48,12 @@ class ProductosController extends Controller
     public function postCreateProductos(ProductoFormRequest $request) {
         $validator = $request->validated();
 
+        // Guardamos la imagen en storage/public
         $request->file("imagen")->store("public");
 
         $producto = new Producto;
         $producto->nombre = $request->input("nombre");
-        $producto->imagen = asset("storage/" . $request->file("imagen")->hashName());
+        $producto->imagen = asset("storage/" . $request->file("imagen")->hashName()); // URL de la imagen en public/storage
         $producto->precio = $request->input("precio");
         $producto->descripcion = $request->input("descripcion");
         $producto->save();
@@ -80,21 +62,18 @@ class ProductosController extends Controller
         return redirect("/admin/productos/show");
     }
 
-    // Mostrar formulario para editar producto
-    // TODO: modificar vista para que muestre la imagen
+    // Muestra el formulario para editar un producto
     public function getEditProductos($id) {
         $producto = Producto::findOrFail($id);
         return view("productos.edit", ["producto" => $producto]);
     }
 
-    // Editar un producto según el formulario anterior
+    // Edita un producto según el formulario anterior
     public function putEditProductos($id,ProductoFormRequest $request) {
         $validator = $request->validated();
-        $request->file("imagen")->store("public");
 
         $producto = Producto::findOrFail($id);
         $producto->nombre = $request->input("nombre");
-        $producto->imagen = asset("storage/" . $request->file("imagen")->hashName());
         $producto->precio = $request->input("precio");
         $producto->descripcion = $request->input("descripcion");
         $producto->save();
@@ -103,7 +82,31 @@ class ProductosController extends Controller
         return redirect("/admin/productos/show");
     }
 
-    // Eliminar un producto
+    // Muestra el formulario para cambiar la imagen de un producto
+    public function getImagen($id) {
+        return view("productos.imagen");
+    }
+
+    // Cambia la imagen de un producto con id $id según el formulario anterior
+    public function putImagen($id, Request $request) {
+        $validator = Validator::make($request->all(), ["imagen" => "required|mimes:png,jpg|max:2048"]);
+        if ($validator->fails()) {
+            return redirect("/admin/comandas/imagen/" . $id)
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+
+        $request->file("imagen")->store("public");
+
+        $producto = Producto::findOrFail($id);
+        $producto->imagen = asset("storage/" . $request->file("imagen")->hashName());
+        $producto->save();
+
+        $request->session()->flash("correcto", "Se ha cambiado la imagen");
+        return redirect("/admin/productos/show");
+    }
+
+    // Elimina un producto
     public function deleteProductos($id, Request $request) {
         $producto = Producto::findOrFail($id);
         $producto->delete();

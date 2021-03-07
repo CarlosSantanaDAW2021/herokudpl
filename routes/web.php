@@ -35,6 +35,8 @@ Route::group(["middleware" => "verified"], function() {
         Route::post("/admin/productos/create", [ProductosController::class, "postCreateProductos"]);
         Route::get("/admin/productos/edit/{id}", [ProductosController::class, "getEditProductos"]);
         Route::put("/admin/productos/edit/{id}", [ProductosController::class, "putEditProductos"]);
+        Route::get("/admin/productos/imagen/{id}", [ProductosController::class, "getImagen"]);
+        Route::put("/admin/productos/imagen/{id}", [ProductosController::class, "putImagen"]);
         Route::delete("/admin/productos/delete/{id}", [ProductosController::class, "deleteProductos"]);
     
         //rutas clientes
@@ -58,17 +60,7 @@ Route::group(["middleware" => "verified"], function() {
 
     Route::get("/usuario/historial", [ClientesController::class, "showHistorial"]);
     Route::get("/usuario/comanda/{id}", [ClientesController::class, "showComanda"]);
-
-    //rutas comandas
-    Route::get("/admin/comandas/show", [ComandasController::class, "showComandas"]);
-    Route::get("/admin/comandas/show/{id}", [ComandasController::class, "showComandasId"]);
-    Route::get("/admin/comandas/edit/{id}", [ComandasController::class, "getEditComandas"]);
-    Route::put("/admin/comandas/edit/{id}", [ComandasController::class, "putEditComandas"]);
-    Route::get("/admin/comandas/edit/{idComanda}/{idProducto}", [ComandasController::class, "getEditComandasSingle"]);
-    Route::put("/admin/comandas/edit/{idComanda}/{idProducto}", [ComandasController::class, "putEditComandasSingle"]);
-    Route::delete("/admin/comandas/delete/{id}", [ComandasController::class, "deleteComandas"]);
-    Route::delete("/admin/comandas/delete/{idComanda}/{idProducto}", [ComandasController::class, "deleteComandasSingle"]);
     
+    Route::get("/pedido", [ComandasController::class, "getCreateComandas"]);
+    Route::post("/pedido", [ComandasController::class, "postCreateComandas"]);
 });
-
-

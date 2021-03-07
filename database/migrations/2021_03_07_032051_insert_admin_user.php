@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\User;
 
+// Crea el usuario admin con id 0
 class InsertAdminUser extends Migration
 {
     /**

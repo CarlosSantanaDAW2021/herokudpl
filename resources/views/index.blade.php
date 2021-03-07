@@ -37,6 +37,10 @@
         </div>
     </div>
   @endif
+  
+  @if(Session::has("correcto"))
+      <div class="alert alert-success">{{Session::get("correcto")}}</div>
+  @endif
 
   <!-- Jumbotron Header -->
   <header class="jumbotron my-3">

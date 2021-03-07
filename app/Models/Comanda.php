@@ -9,6 +9,7 @@ class Comanda extends Model
 {
     use HasFactory;
 
+    // Relacion n:m (pivote) con productos
     public function productos() {
         return $this->belongsToMany("\App\Models\Producto");
     }
