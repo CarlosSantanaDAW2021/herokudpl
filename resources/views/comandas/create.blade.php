@@ -1,5 +1,14 @@
 @extends("layouts.app")
 @include('partials.form-partial')
+
+@section("panel-admin")
+    @include("partials.panel-admin")
+@stop
+
+@section("mostrar-ocultar")
+    @include("partials.mostrar-ocultar")
+@stop
+
 @section('content')
 <div class="row" style="margin-top:40px">
    <div class="offset-md-3 col-md-6">

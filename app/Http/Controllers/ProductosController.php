@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use Illuminate\Support\Facades\DB;
@@ -11,6 +13,7 @@ use App\Http\Requests\ProductoFormRequest;
 
 class ProductosController extends Controller
 {
+<<<<<<< HEAD
     // mostrar productos en pagina principal
     public function getProductos() {
         
@@ -31,7 +34,24 @@ class ProductosController extends Controller
         }
         else{
             return view('busqueda');
+=======
+    // Mostrar productos en pagina principal
+    public function getProductos(Request $request) {
+        if (Auth::check()) {
+            $id = Auth::user()->id ?? "NOTHING";
+            $usuario = User::findOrFail($id);
+            $rol = $usuario->rol;
+        } else {
+            $rol = "NOTHING";
+>>>>>>> 37500d8f01c7e2ed5705628d7a980adeb5141380
         }
+
+        $texto = trim($request->get("texto"));
+        $productos = DB::table("productos")
+                        ->where("nombre", "LIKE", "%" . $texto . "%")
+                        ->paginate(8);
+
+        return view('index', compact("productos", "texto", "rol"));
     }
 
     // Mostrar productos en admin

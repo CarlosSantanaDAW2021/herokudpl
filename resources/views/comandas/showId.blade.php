@@ -1,9 +1,19 @@
 @extends("layouts.admin-main")
+
+@section("panel-admin")
+    @include("partials.panel-admin")
+@stop
+
+@section("mostrar-ocultar")
+    @include("partials.mostrar-ocultar")
+@stop
+
 @section("content")
     @if(Session::has("correcto"))
         <div class="alert alert-success">{{Session::get("correcto")}}</div>
     @endif
     
+    <a class="btn btn-success" href="{{ url('/admin/comandas/create/' . $id) }}">Añadir producto</a>
     <table class="table">
         <thead>
             <th scope="col">Producto</th>
