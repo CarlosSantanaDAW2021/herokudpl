@@ -16,7 +16,7 @@ class InsertAdminUser extends Migration
     public function up()
     {
         $admin = new User;
-        $admin->id = 0;
+        $admin->id = 1;
         $admin->name = "Admin";
         $admin->email = "admin@cafeteria.com";
         $admin->email_verified_at = new DateTime();
@@ -33,7 +33,6 @@ class InsertAdminUser extends Migration
      */
     public function down()
     {
-        $admin = User::findOrFail(0)->delete();
-        
+        $admin = User::findOrFail(1)->delete();
     }
 }

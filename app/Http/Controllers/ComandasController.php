@@ -31,7 +31,6 @@ class ComandasController extends Controller
         $productos = DB::table("comandas_productos")
                             ->join("productos", "comandas_productos.idProducto", "=", "productos.id")
                             ->where("idComanda", $id)
-                            ->where("cantidad", ">", 0)
                             ->select("comandas_productos.*", "productos.nombre")
                             ->get();
         
@@ -67,7 +66,9 @@ class ComandasController extends Controller
 
         // Generamos la validación para cada input
         foreach ($inputs as $key => $value) {
-            $validationArray[$key] = "required|integer|gte:0";
+            if ($value != 0) {
+                $validationArray[$key] = "required|integer|gte:0";
+            }
         }
 
         $validator = Validator::make($request->all(), [$validationArray]);
@@ -85,17 +86,19 @@ class ComandasController extends Controller
 
         // Creamos un registro de la tabla pivote por cada producto/input
         foreach ($inputs as $key => $value) {
-            $producto = Producto::findOrFail($key);
+            if ($value != 0) {
+                $producto = Producto::findOrFail($key);
 
-            $precio = $producto->precio * $value; // Precio del registro = precio del producto * cantidad indicada
-            $precioTotal += $precio; // Añadimos el precio del registro al precio total de la comanda
-
-            $pivote = new ComandasProductos;
-            $pivote->idComanda = $comanda->id; // Asignamos el registro a la comanda que acabamos de crear
-            $pivote->idProducto = $key;
-            $pivote->cantidad = $value;
-            $pivote->precio = $precio;
-            $pivote->save();
+                $precio = $producto->precio * $value; // Precio del registro = precio del producto * cantidad indicada
+                $precioTotal += $precio; // Añadimos el precio del registro al precio total de la comanda
+    
+                $pivote = new ComandasProductos;
+                $pivote->idComanda = $comanda->id; // Asignamos el registro a la comanda que acabamos de crear
+                $pivote->idProducto = $key;
+                $pivote->cantidad = $value;
+                $pivote->precio = $precio;
+                $pivote->save();
+            }
         }
 
         $comanda->precio = $precioTotal; // Acutalizamos la comanda con el precio que hemos calculado dentro del foreach
