@@ -32,7 +32,6 @@ class ClientesController extends Controller
         $productos = DB::table("comandas_productos")
                             ->join("productos", "comandas_productos.idProducto", "=", "productos.id")
                             ->where("idComanda", $id)
-                            ->where("cantidad", ">", 0)
                             ->select("comandas_productos.*", "productos.nombre")
                             ->get();
         
