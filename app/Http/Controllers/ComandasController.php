@@ -29,8 +29,9 @@ class ComandasController extends Controller
         // Mostraremos todos los registros de la tabla pivote que están relacionados
         // con la comanda que tiene la id $id
         $productos = DB::table("comandas_productos")
-                            ->where("idComanda", $id)
                             ->join("productos", "comandas_productos.idProducto", "=", "productos.id")
+                            ->where("idComanda", $id)
+                            ->where("cantidad", ">", 0)
                             ->select("comandas_productos.*", "productos.nombre")
                             ->get();
         
